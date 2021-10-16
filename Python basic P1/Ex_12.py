@@ -3,12 +3,24 @@ import re
 import calendar
 while 1:
     year_month = input('Put here year and month in format: YYYY,MM >>>')
-    if re.match('[0-9]{4},[0-9]{2}',year_month):
+    if re.match('[0-9]{4},[0-9]{1,2}',year_month):
+        year = int(year_month.split(',')[0])
+        month = int(year_month.split(',')[1])
+        
         break
     print('wrong input, pls retype...')
 cal = calendar.TextCalendar(firstweekday=0)
+Mmatrix = cal.monthdayscalendar(year,month)
+print(cal.formatmonthname(year,month,10))
+print('Monday   Tuesday   Wednesday   Thursday   Friday   Satarday   Sunday', end = '')
+for x in Mmatrix:
+    print()
+    for y in x:
+        if (y == 0):
+            print('        ', end = '')
+        else:
+            print(str(y) + '         ', end = '')    
 
-for i in cal.itermonthdays(2021,10):
-    print(i)
 
-print(cal.monthdayscalendar(2021,10))
+print()
+print(Mmatrix)
